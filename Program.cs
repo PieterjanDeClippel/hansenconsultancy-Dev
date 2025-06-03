@@ -42,6 +42,7 @@ if (args.Length > 0)
         table.AddRow("build (b)", "Builds the current solution or project in Release mode.");
         table.AddRow("frontend (f)", "Runs the Vidyano frontend builder in the current directory.");
         table.AddRow("clean", "Clean the current folder by removing [yellow]bin[/], [yellow]obj[/], [yellow]tmp-build[/], [yellow]bin-windows[/], [yellow]bin-linux[/], [yellow]obj-windows[/], [yellow]obj-linux[/] folders. Use this command if you experience build issues.");
+        table.AddRow("doc", "Generate markdown files based on the current solution or project. This is useful for generating documentation for your project.");
         table.AddRow("help (h)", "Displays this help message.");
 
         AnsiConsole.Write(table);
@@ -166,6 +167,18 @@ if (args.Length > 0)
             }
         }
         return;
+    }
+
+    if (command is "doc")
+    {
+        var docType = args.ElementAtOrDefault(1);
+        if (docType is null)
+        {
+            AnsiConsole.MarkupLine("[red]No documentation type specified. Use 'doc [type]' where [type] is 'roles-and-permissions', 'changelog' or 'services'.[/]");
+            return;
+        }
+
+        AnsiConsole.MarkupLine("[green]Generating documentation...[/]");
     }
 }
 
